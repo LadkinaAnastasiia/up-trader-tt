@@ -1,0 +1,19 @@
+{% load menu_extras %}
+{% if menu_item %}
+    {% if menu_item.children %}
+        <details {% if active_url in menu_item.get_urls %} open {% endif %}>
+            <summary>
+                <a href="{{ menu_item.get_url }}" {% if menu_item.get_url == active_url %}
+                   style="background-color: blanchedalmond"{% endif %}>{{ menu_item.name }}</a>
+            </summary>
+            {% for child in menu_item.children %}
+                <div class="menu_item" style="margin-left: 2rem">
+                    {% draw_menu_item_children child %}
+                </div>
+            {% endfor %}
+        </details>
+    {% else %}
+        <a href="{{ menu_item.get_url }}" {% if menu_item.get_url == active_url %}
+           style="background-color: blanchedalmond"{% endif %}>{{ menu_item.name }}</a>
+    {% endif %}
+{% endif %}
